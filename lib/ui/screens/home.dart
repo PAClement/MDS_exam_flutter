@@ -13,8 +13,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Card(
-        child: Text('je suis la'),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          children: <Widget>[
+            Text('Deliver features faster'),
+            ElevatedButton(
+              child: Text('Les trames ?'),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/trame");
+              },
+            )
+          ],
+        ),
       ),
     );
   }

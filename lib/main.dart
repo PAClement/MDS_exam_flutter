@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keskistram/ui/screens/home.dart';
+import 'package:keskistram/ui/screens/trame/trame.dart';
+import 'package:keskistram/ui/screens/trame/trame_map.dart';
 
 void main() {
 
@@ -12,13 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Keskistrams',
+      //debugShowMaterialGrid: true,
+      title: 'Keskistrame',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const Home(),
       routes: {
         '/home': (context) => const Home(),
+        '/trame': (context) => const Trame(),
+        '/trameMap': (context) => const TrameMap(),
       },
     );
   }
