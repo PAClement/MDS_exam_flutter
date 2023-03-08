@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import '../../../models/model_trame.dart';
 
 class Trame extends StatefulWidget {
   const Trame({super.key});
@@ -10,6 +11,12 @@ class Trame extends StatefulWidget {
 }
 
 class _Trame extends State<Trame> {
+  final List<ModelTrame> _trames = [
+    const ModelTrame(0, 'Trame 1'),
+    const ModelTrame(1, 'Trame 2'),
+    const ModelTrame(2, 'Trame 3'),
+  ];
+
   int _selectedIndex = 1;
 
   void _onItemTapped(int index) {
@@ -26,18 +33,50 @@ class _Trame extends State<Trame> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(32, 1, 34, 1),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(top: 10.0),
+              margin: const EdgeInsets.only(top: 10.0, bottom: 30.0),
               child: const Text(
-                'VOS FAVORIS',
+                'FAVORIS',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 30,
                 ),
+              ),
+            ),
+            Expanded(
+              child: ListView.separated(
+                itemCount: _trames.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final ModelTrame trameList = _trames[index];
+                  return Padding(
+                    padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                    child: Card(
+                      color: const Color.fromRGBO(100, 100, 100, 0.5),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        child: ListTile(
+                          onTap: () {},
+                          leading: const Icon(Icons.tram, color: Colors.white),
+                          title: Text(
+                            trameList.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider(height: 0);
+                },
               ),
             ),
           ],
@@ -55,6 +94,13 @@ class _Trame extends State<Trame> {
           selectedItemColor: Colors.amber[800],
           unselectedItemColor: Colors.white,
           onTap: _onItemTapped,
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromRGBO(111, 0, 0, 1),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/addTrame');
+          },
+          child: const Icon(Icons.add),
         ),
       ),
     );

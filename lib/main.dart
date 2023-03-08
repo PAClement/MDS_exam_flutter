@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keskistram/ui/screens/home.dart';
 import 'package:keskistram/ui/screens/trame/trame.dart';
 import 'package:keskistram/ui/screens/trame/trame_map.dart';
+import 'package:keskistram/ui/screens/trame/add_trame.dart';
 
 void main() {
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const Home(),
         '/trame': (context) => const Trame(),
         '/trameMap': (context) => const TrameMap(),
+        '/addTrame': (context) => const AddTrame(),
       },
     );
   }

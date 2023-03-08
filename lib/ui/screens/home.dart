@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 50,
                     ),
                   ),
                 ),
@@ -52,8 +52,8 @@ class _HomeState extends State<Home> {
                       Navigator.of(context).pushNamed("/trame");
                     },
                     child: const Text(
-                      'Trame',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                      'Les Trames',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
                   ),
                 ),
