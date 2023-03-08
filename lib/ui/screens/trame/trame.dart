@@ -3,34 +3,58 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Trame extends StatefulWidget {
-  const Trame({Key? key}) : super(key: key);
+  const Trame({super.key});
 
   @override
-  State<Trame> createState() => _TrameState();
+  State<Trame> createState() => _Trame();
 }
 
-class _TrameState extends State<Trame> {
+class _Trame extends State<Trame> {
+  int _selectedIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 0) {
+      Navigator.of(context).pop("/home");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('Deliver features faster'),
-            ElevatedButton(
-              child: Text('<- Vers le menu'),
-              onPressed: () {
-                Navigator.of(context).pop('/home');
-              },
+            Container(
+              margin: const EdgeInsets.only(top: 10.0),
+              child: const Text(
+                'VOS FAVORIS',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                ),
+              ),
             ),
-            ElevatedButton(
-              child: Text('Vers la map ->'),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/trameMap");
-              },
-            )
           ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color.fromRGBO(15, 15, 15, 1),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favoris',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          unselectedItemColor: Colors.white,
+          onTap: _onItemTapped,
         ),
       ),
     );

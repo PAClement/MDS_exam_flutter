@@ -14,41 +14,51 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                margin: new EdgeInsets.symmetric(vertical: 100.0),
-                child: const Text(
-                  'Keskistram ?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                  ),
-                ),
-              ),
-              Container(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    fixedSize: Size.fromHeight(100),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/trame");
-                  },
+        backgroundColor: Colors.red,
+        body: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.1, 0.9],
+            colors: [
+              Color.fromRGBO(32, 1, 34,1),
+              Color.fromRGBO(111, 0, 0, 1),
+            ],
+          )),
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  margin: new EdgeInsets.symmetric(vertical: 100.0),
                   child: const Text(
-                    'Trame',
+                    'Keskistram ?',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15
+                      fontSize: 30,
                     ),
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(100, 100, 100, 0.5),
+                      fixedSize: Size.fromHeight(100),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed("/trame");
+                    },
+                    child: const Text(
+                      'Trame',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

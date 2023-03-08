@@ -14,15 +14,25 @@ class TrameMap extends StatefulWidget {
 class _TrameMapState extends State<TrameMap> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body:  FlutterMap(
+          options: MapOptions(
+            center: LatLng(47.478419, -0.563166),
+            zoom: 10.0,
+          ),
           children: [
-            Flexible(
-              child: FlutterMap(
-                options: MapOptions(center: LatLng(23.7, 90.3), zoom: 8),
-              ),
-            )
+            TileLayer(
+              urlTemplate:
+              "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+              subdomains: const ['a', 'b', 'c'],
+            ),
+            ElevatedButton(
+              child: Text('<-'),
+              onPressed: () {
+                Navigator.of(context).pop('/trame');
+              },
+            ),
           ],
         ),
       ),
