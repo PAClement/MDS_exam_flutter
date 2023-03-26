@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../blocs/stop_trame_cubit.dart';
+import '../../../models/model_trame.dart';
 
 class Trame extends StatefulWidget {
   const Trame({super.key});
@@ -42,37 +46,41 @@ class _Trame extends State<Trame> {
                 ),
               ),
             ),
-            // Expanded(
-            //   child: ListView.separated(
-            //     itemCount: _stoptrames.length,
-            //     itemBuilder: (BuildContext context, int index) {
-            //       final ModelTrame trameList = _stoptrames[index];
-            //       return Padding(
-            //         padding: EdgeInsets.only(left: 5.0, right: 5.0),
-            //         child: Card(
-            //           color: const Color.fromRGBO(100, 100, 100, 0.5),
-            //           child: Padding(
-            //             padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-            //             child: ListTile(
-            //               onTap: () {},
-            //               leading: const Icon(Icons.tram, color: Colors.white),
-            //               title: Text(
-            //                 trameList.stopname,
-            //                 style: const TextStyle(
-            //                   color: Colors.white,
-            //                   fontSize: 20,
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //     separatorBuilder: (BuildContext context, int index) {
-            //       return const Divider(height: 0);
-            //     },
-            //   ),
-            // ),
+            Expanded(
+              child: BlocBuilder<TrameCubit, List<ModelTrame>>(
+                builder: (BuildContext context, List<ModelTrame> stopTrames) {
+                  return ListView.separated(
+                    itemCount: stopTrames.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final ModelTrame stopTrame = stopTrames[index];
+                      return Padding(
+                        padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Card(
+                          color: const Color.fromRGBO(100, 100, 100, 0.5),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                            child: ListTile(
+                              onTap: () {},
+                              leading: const Icon(Icons.tram, color: Colors.white),
+                              title: Text(
+                                stopTrame.stop_name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(height: 0);
+                    },
+                  );
+                }
+              ),
+            ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

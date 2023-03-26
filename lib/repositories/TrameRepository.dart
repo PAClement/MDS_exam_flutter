@@ -16,7 +16,6 @@ class TrameRepository{
       final List<ModelTrame> stopTrames = [];
 
       final Map<String, dynamic> json = jsonDecode(response.body);
-      print(jsonDecode(response.body));
       if(json.containsKey("records")){
         final List<dynamic> records = json['records'];
 
@@ -29,7 +28,5 @@ class TrameRepository{
       }
 
       return stopTrames;
-
-
   }
 }

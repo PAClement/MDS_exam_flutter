@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:keskistram/blocs/stop_trame_cubit.dart';
+import 'package:keskistram/repositories/PreferencesRepository.dart';
 import 'package:keskistram/ui/screens/home.dart';
 import 'package:keskistram/ui/screens/trame/trame.dart';
 import 'package:keskistram/ui/screens/trame/trame_map.dart';
 import 'package:keskistram/ui/screens/trame/add_trame.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const MyApp());
+  final PreferencesRepository preferencesRepository = PreferencesRepository();
+  final TrameCubit trameCubit = TrameCubit(preferencesRepository);
+
+  trameCubit.loadStopTrames();
+
+  runApp(BlocProvider<TrameCubit>(
+    create: (_) => trameCubit,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

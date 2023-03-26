@@ -2,17 +2,18 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../models/model_trame.dart';
 import '../../../repositories/TrameRepository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/stop_trame_cubit.dart';
+import '../../../models/model_trame.dart';
 
 class AddTrame extends StatefulWidget {
   const AddTrame({super.key});
 
   @override
   State<AddTrame> createState() => _AddTrame();
-
 }
 
 class _AddTrame extends State<AddTrame> {
-
   List<ModelTrame> _stopTrames = [];
 
   @override
@@ -33,7 +34,7 @@ class _AddTrame extends State<AddTrame> {
                     final TrameRepository trameRepo = TrameRepository();
 
                     final List<ModelTrame> data =
-                    await trameRepo.fetchStopTrame(value);
+                        await trameRepo.fetchStopTrame(value);
 
                     setState(() {
                       _stopTrames = data;
@@ -49,10 +50,18 @@ class _AddTrame extends State<AddTrame> {
                   final item = _stopTrames[index];
 
                   return ListTile(
-                    title: Text(item.stopname),
-                    subtitle: Text(item.wheelchairboarding),
+                    title: Text(item.stop_name),
+                    subtitle:
+                        Text("${item.stop_id} - ${item.wheelchair_boarding}"),
                     onTap: () {
-                      Navigator.of(context).pop(item);
+                      final ModelTrame modelTrame = ModelTrame(
+                          item.recordid,
+                          item.stop_name,
+                          item.stop_id,
+                          item.wheelchair_boarding);
+
+                      context.read<TrameCubit>().addStopTrames(modelTrame);
+                      Navigator.of(context).pop();
                     },
                   );
                 },
