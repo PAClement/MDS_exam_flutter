@@ -12,7 +12,6 @@ class TrameRepository{
           '&refine.stop_name=$query')
     );
 
-
       final List<ModelTrame> stopTrames = [];
 
       final Map<String, dynamic> json = jsonDecode(response.body);
@@ -28,5 +27,12 @@ class TrameRepository{
       }
 
       return stopTrames;
+  }
+
+  Future<List<ModelTrame>> fetchTrameNearStopTrame(String query) async{
+
+    final List<ModelTrame> tramesNearStopTrame = [];
+
+    return tramesNearStopTrame;
   }
 }

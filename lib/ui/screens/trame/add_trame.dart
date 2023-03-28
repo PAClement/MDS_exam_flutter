@@ -4,7 +4,6 @@ import '../../../models/model_trame.dart';
 import '../../../repositories/TrameRepository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/stop_trame_cubit.dart';
-import '../../../models/model_trame.dart';
 
 class AddTrame extends StatefulWidget {
   const AddTrame({super.key});
@@ -34,7 +33,7 @@ class _AddTrame extends State<AddTrame> {
                     final TrameRepository trameRepo = TrameRepository();
 
                     final List<ModelTrame> data =
-                        await trameRepo.fetchStopTrame(value);
+                        await trameRepo.fetchStopTrame(value.toUpperCase());
 
                     setState(() {
                       _stopTrames = data;
@@ -52,13 +51,14 @@ class _AddTrame extends State<AddTrame> {
                   return ListTile(
                     title: Text(item.stop_name),
                     subtitle:
-                        Text("${item.stop_id} - ${item.wheelchair_boarding}"),
+                        Text("${item.stop_id} - ${item.stop_coordinates}"),
                     onTap: () {
                       final ModelTrame modelTrame = ModelTrame(
                           item.recordid,
                           item.stop_name,
                           item.stop_id,
-                          item.wheelchair_boarding);
+                          item.wheelchair_boarding,
+                          item.stop_coordinates);
 
                       context.read<TrameCubit>().addStopTrames(modelTrame);
                       Navigator.of(context).pop();
