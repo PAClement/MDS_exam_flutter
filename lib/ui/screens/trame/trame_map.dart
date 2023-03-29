@@ -56,7 +56,7 @@ class _TrameMapState extends State<TrameMap> {
                         Marker(
                           point: LatLng(widget.selectStopTrame[0],
                               widget.selectStopTrame[1]),
-                          builder: (ctx) => const Icon(Icons.location_on,
+                          builder: (ctx) => const Icon(Icons.pin_drop,
                               color: Colors.red, size: 20),
                         ),
                       ],
