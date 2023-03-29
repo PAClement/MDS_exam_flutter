@@ -9,44 +9,61 @@ import '../../../blocs/stop_trame_cubit.dart';
 import '../../../models/model_trame.dart';
 
 class TrameMap extends StatefulWidget {
-  const TrameMap({Key? key}) : super(key: key);
+  final List selectStopTrame;
+
+  const TrameMap({super.key, required this.selectStopTrame});
 
   @override
   State<TrameMap> createState() => _TrameMapState();
 }
 
 class _TrameMapState extends State<TrameMap> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body:  Column(
+        body: Column(
           children: [
             Expanded(
               child: BlocBuilder<TrameCubit, List<ModelTrame>>(
-                builder: (BuildContext context, List<ModelTrame> stopTrames) {
-                  return FlutterMap(
-                    options: MapOptions(
-                      center: LatLng(47.478419, -0.563166),
-                      zoom: 10.0,
+                  builder: (BuildContext context, List<ModelTrame> stopTrames) {
+                return FlutterMap(
+                  options: MapOptions(
+                    center: LatLng(
+                        widget.selectStopTrame[0], widget.selectStopTrame[1]),
+                    zoom: 15.0,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: const ['a', 'b', 'c'],
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        subdomains: const ['a', 'b', 'c'],
+                    ElevatedButton(
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 24.0,
+                        semanticLabel:
+                            'Text to announce in accessibility modes',
                       ),
-                      ElevatedButton(
-                        child: Text('<-'),
-                        onPressed: () {
-                          Navigator.of(context).pop('/trame');
-                        },
-                      ),
-                    ],
-                  );
-                }
-              ),
+                      onPressed: () {
+                        Navigator.of(context).pop('/trame');
+                      },
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          point: LatLng(widget.selectStopTrame[0],
+                              widget.selectStopTrame[1]),
+                          builder: (ctx) => const Icon(Icons.location_on,
+                              color: Colors.red, size: 20),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              }),
             ),
           ],
         ),

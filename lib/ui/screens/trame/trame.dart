@@ -59,17 +59,9 @@ class _Trame extends State<Trame> {
                         color: const Color.fromRGBO(100, 100, 100, 0.5),
                         child: ListTile(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const TrameMap(),
-                                // Pass the arguments as part of the RouteSettings. The
-                                // DetailScreen reads the arguments from these settings.
-                                settings: RouteSettings(
-                                  arguments: stopTrame.stop_coordinates,
-                                ),
-                              ),
-                            );
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    TrameMap(selectStopTrame: stopTrame.stop_coordinates)));
                           },
                           leading: const Icon(Icons.tram, color: Colors.white),
                           title: Text(

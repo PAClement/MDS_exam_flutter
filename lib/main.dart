@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const Home(),
         '/trame': (context) => const Trame(),
-        '/trameMap': (context) => const TrameMap(),
+        '/trameMap': (context) => const TrameMap(selectStopTrame:[0,0]),
         '/addTrame': (context) => const AddTrame(),
       },
     );
