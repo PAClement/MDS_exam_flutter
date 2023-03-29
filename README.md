@@ -1,16 +1,25 @@
 # keskistram
 
-A new Flutter project.
+Cette application permet à l'utilisateur d'ajouter son arrêt de trame à ses favoris.
+Ensuite l'utilisateur pourra en cliquant sur son arrêt dans ses favoris voir sur une map,
+la localisation de son arrêt, et il pourra savoir quand le prochain trame arrive à son arrêt.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Landing Page
 
-A few resources to get you started if this is your first Flutter project:
+Page d'acceuil avec un petite explication de l'application
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Favoris Page
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Cette page regroupe les favoris de l'utilisateur et il permet d'ajouter un arrêt facilement
+
+Elle permet également de voir sur une modal les informations de l'arrêt 
+(sa position et l'horaire du prochain trame).
+
+## Ajout Trame
+
+Cette page permet d'ajouter un arrêt de trame.
+
+## Map
+
+Cette page permet à l'utilisateur de voir la position de l'arrêt de trame sur la map

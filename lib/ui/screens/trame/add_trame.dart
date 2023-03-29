@@ -40,8 +40,6 @@ class _AddTrame extends State<AddTrame> {
               child: TextField(
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.location_on),
-                  border: OutlineInputBorder(),
-                  labelText: 'Arrêt de trames',
                 ),
                 onChanged: (value) async {
                   if (value.length >= 2) {
@@ -64,6 +62,7 @@ class _AddTrame extends State<AddTrame> {
                   final item = _stopTrames[index];
 
                   return ListTile(
+                    tileColor: const Color.fromRGBO(200, 200, 200, 1),
                     title: Text(item.stop_name),
                     subtitle:
                         Text("${item.stop_id} - ${item.stop_coordinates}"),

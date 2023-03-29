@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 20.0),
                   child: const Text(
-                    "Ajouter votre arrêt de tram à vos favoris, puis vous pourrez voir le trame le plus proche !",
+                    "Ajouter votre arrêt de trame à vos favoris, puis vous pourrez le voir sur la map et savoir quand le prochain trame arrive !",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
