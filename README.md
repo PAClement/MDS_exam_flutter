@@ -7,13 +7,14 @@ la localisation de son arrêt, et il pourra savoir quand le prochain trame arriv
 
 ## Landing Page
 
-Page d'acceuil avec un petite explication de l'application
+Page d'accueil avec une petite explication de l'application
 
 ## Favoris Page
 
-Cette page regroupe les favoris de l'utilisateur et il permet d'ajouter un arrêt facilement
+Cette page regroupe les favoris de l'utilisateur et il permet d'ajouter un arrêt 
+facilement
 
-Elle permet également de voir sur une modal les informations de l'arrêt 
+Elle permet également de voir sur un modal les informations de l'arrêt 
 (sa position et l'horaire du prochain trame).
 
 ## Ajout Trame
