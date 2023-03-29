@@ -20,7 +20,22 @@ class _AddTrame extends State<AddTrame> {
     return SafeArea(
       child: Scaffold(
         body: Card(
+          color: const Color.fromRGBO(32, 1, 34, 1),
           child: Column(children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
+              ),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 24.0,
+                semanticLabel: 'Text to announce in accessibility modes',
+              ),
+              onPressed: () {
+                Navigator.of(context).pop('/trame');
+              },
+            ),
             Card(
               child: TextField(
                 decoration: const InputDecoration(

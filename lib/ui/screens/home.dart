@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
             end: Alignment.bottomCenter,
             stops: [0.1, 0.9],
             colors: [
-              Color.fromRGBO(32, 1, 34,1),
+              Color.fromRGBO(32, 1, 34, 1),
               Color.fromRGBO(111, 0, 0, 1),
             ],
           )),
@@ -42,19 +42,25 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(100, 100, 100, 0.5),
+                    fixedSize: Size.fromHeight(100),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/trame");
+                  },
+                  child: const Text(
+                    'Les Trames',
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                ),
                 Container(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(100, 100, 100, 0.5),
-                      fixedSize: Size.fromHeight(100),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed("/trame");
-                    },
-                    child: const Text(
-                      'Les Trames',
-                      style: TextStyle(color: Colors.white, fontSize: 30),
-                    ),
+                  margin: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: const Text(
+                    "Ajouter votre arrêt de tram à vos favoris, puis vous pourrez voir le trame le plus proche !",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
               ],

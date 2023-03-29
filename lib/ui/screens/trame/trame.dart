@@ -27,11 +27,13 @@ class _Trame extends State<Trame> {
     }
   }
 
+  void fetchHoraire(stopName) {}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(32, 1, 34, 1),
+        backgroundColor: const Color.fromRGBO(32, 1, 34, 1),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -54,14 +56,71 @@ class _Trame extends State<Trame> {
                   itemBuilder: (BuildContext context, int index) {
                     final ModelTrame stopTrame = stopTrames[index];
                     return Padding(
-                      padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                       child: Card(
                         color: const Color.fromRGBO(100, 100, 100, 0.5),
                         child: ListTile(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    TrameMap(selectStopTrame: stopTrame.stop_coordinates)));
+                            showModalBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  color: const Color.fromRGBO(15, 15, 15, 1),
+                                  height: 200,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
+                                            ),
+                                            child:
+                                                const Icon(Icons.location_on),
+                                            onPressed: () =>
+                                                Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => TrameMap(
+                                                    selectStopTrame: stopTrame
+                                                        .stop_coordinates),
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            stopTrame.stop_name,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
+                                            ),
+                                            child: const Icon(Icons.close),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text(
+                                            "Liste data",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
                           },
                           leading: const Icon(Icons.tram, color: Colors.white),
                           title: Text(
@@ -98,7 +157,7 @@ class _Trame extends State<Trame> {
           onTap: _onItemTapped,
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Color.fromRGBO(111, 0, 0, 1),
+          backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
           onPressed: () {
             Navigator.of(context).pushNamed('/addTrame');
           },
