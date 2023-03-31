@@ -8,8 +8,7 @@ class TrameRepository{
     final Response response = await get(
       Uri.parse('https://data.angers.fr/api/records/1.0/search/?'
           'dataset=horaires-theoriques-et-arrets-du-reseau-irigo-gtfs'
-          '&q=&facet=stop_name&facet=wheelchair_boarding&facet=stop_id'
-          '&refine.stop_name=$query')
+          '&q=$query&facet=stop_name&facet=wheelchair_boarding&facet=stop_id')
     );
 
       final List<ModelTrame> stopTrames = [];
