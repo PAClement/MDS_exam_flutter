@@ -65,7 +65,7 @@ class _AddTrame extends State<AddTrame> {
                     tileColor: const Color.fromRGBO(200, 200, 200, 1),
                     title: Text(item.stop_name),
                     subtitle:
-                        Text("${item.stop_id} - ${item.stop_coordinates}"),
+                        Text(item.stop_id),
                     onTap: () {
                       final ModelTrame modelTrame = ModelTrame(
                           item.recordid,
