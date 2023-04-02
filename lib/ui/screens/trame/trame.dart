@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keskistram/ui/screens/trame/trame_map.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import '../../../blocs/stop_trame_cubit.dart';
 import '../../../models/model_trame.dart';
@@ -11,11 +14,12 @@ class Trame extends StatefulWidget {
   const Trame({super.key});
 
   @override
-  State<Trame> createState() => _Trame();
+  _Trame createState() => _Trame();
 }
 
 class _Trame extends State<Trame> {
   int _selectedIndex = 1;
+  var arrivee;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -27,7 +31,30 @@ class _Trame extends State<Trame> {
     }
   }
 
-  void fetchHoraire(stopName) {}
+  fetchHoraire(stopName) async {
+    final url = Uri.parse(
+        'https://data.angers.fr/api/records/1.0/search/?dataset=bus-tram-circulation-passages&q=&facet=mnemoligne&facet=nomligne'
+        '&facet=dest&facet=mnemoarret&facet=nomarret&facet=numarret&refine.mnemoarret=$stopName');
+
+    final response = await http.get(url);
+    var data = json.decode(response.body);
+    if (data["records"]?.isEmpty ?? true) {
+      setState(() {
+        arrivee = null;
+      });
+    } else {
+      String formatDate(String dateTimeString) {
+        DateTime dateTime = DateTime.parse(dateTimeString);
+        DateFormat formatter = DateFormat('mm:ss');
+        String formatted = formatter.format(dateTime);
+        return formatted;
+      }
+
+      setState(() {
+        arrivee = formatDate(data["records"][0]["fields"]["arriveetheorique"]);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +87,8 @@ class _Trame extends State<Trame> {
                       child: Card(
                         color: const Color.fromRGBO(100, 100, 100, 0.5),
                         child: ListTile(
-                          onTap: () {
+                          onTap: () async {
+                            await fetchHoraire(stopTrame.stop_id);
                             showModalBottomSheet<void>(
                               context: context,
                               builder: (BuildContext context) {
@@ -75,7 +103,9 @@ class _Trame extends State<Trame> {
                                         children: [
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      111, 0, 0, 1),
                                             ),
                                             child:
                                                 const Icon(Icons.location_on),
@@ -97,7 +127,9 @@ class _Trame extends State<Trame> {
                                           ),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: const Color.fromRGBO(111, 0, 0, 1),
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      111, 0, 0, 1),
                                             ),
                                             child: const Icon(Icons.close),
                                             onPressed: () =>
@@ -105,16 +137,30 @@ class _Trame extends State<Trame> {
                                           ),
                                         ],
                                       ),
-                                      Row(
-                                        children: const [
-                                          Text(
-                                            "Liste data",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                            ),
-                                          )
-                                        ],
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 30),
+                                        child: Column(
+                                          children: [
+                                            if (arrivee == null)
+                                              const Text(
+                                                "Aucune donnée pour le moment",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            if (arrivee != null)
+                                              Text(
+                                                "Arrivé théorique - $arrivee",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
