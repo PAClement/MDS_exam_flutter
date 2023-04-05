@@ -34,4 +34,7 @@ Cette page permet à l'utilisateur de voir la position de l'arrêt de trame sur 
 #####  latlong2: ^0.8.1
 #####  flutter_bloc: ^8.1.2
 #####  shared_preferences: ^2.0.20
-  
+ 
+------------------------------------------------------------
+
+J'ai utilisé l'API data angers, cependant j'ai eu un problème sur les valeurs de retour, je n'ai pas réussi à déterminer si l'arrêt était un arrêt de trame ou de bus.
