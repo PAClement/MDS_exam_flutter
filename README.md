@@ -24,3 +24,12 @@ Cette page permet d'ajouter un arrêt de trame.
 ## Map
 
 Cette page permet à l'utilisateur de voir la position de l'arrêt de trame sur la map
+
+
+------------------------------------------------------------
+
+cupertino_icons: ^1.0.2
+  flutter_map: ^3.1.0
+  latlong2: ^0.8.1
+  flutter_bloc: ^8.1.2
+  shared_preferences: ^2.0.20
